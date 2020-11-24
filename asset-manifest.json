@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/oushanskeen/netology-react-hometasks/static/css/main.d60dbb93.chunk.css",
-    "main.js": "/oushanskeen/netology-react-hometasks/static/js/main.98386067.chunk.js",
-    "main.js.map": "/oushanskeen/netology-react-hometasks/static/js/main.98386067.chunk.js.map",
+    "main.js": "/oushanskeen/netology-react-hometasks/static/js/main.a1ac2770.chunk.js",
+    "main.js.map": "/oushanskeen/netology-react-hometasks/static/js/main.a1ac2770.chunk.js.map",
     "runtime-main.js": "/oushanskeen/netology-react-hometasks/static/js/runtime-main.4fd2fd94.js",
     "runtime-main.js.map": "/oushanskeen/netology-react-hometasks/static/js/runtime-main.4fd2fd94.js.map",
     "static/js/2.1fb124fd.chunk.js": "/oushanskeen/netology-react-hometasks/static/js/2.1fb124fd.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.4fd2fd94.js",
     "static/js/2.1fb124fd.chunk.js",
     "static/css/main.d60dbb93.chunk.css",
-    "static/js/main.98386067.chunk.js"
+    "static/js/main.a1ac2770.chunk.js"
   ]
 }
