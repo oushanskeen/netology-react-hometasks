@@ -14,18 +14,18 @@ const App = () => (
     <div className="nav-bar">
       <ul> components:
         <li>
-          <Link to="/shopitemfunc">ShopItemFuncOutput</Link>
+          <Link to="/netology-react-hometasks/shopitemfunc">ShopItemFuncOutput</Link>
         </li>
         <li>
-          <Link to="/calendar">Calendar</Link>
+          <Link to="/netology-react-hometasks/calendar">Calendar</Link>
         </li>
       </ul>
     </div>
     <Switch>
-      <Route path="/shopitemfunc">
+      <Route exact path="/netology-react-hometasks/shopitemfunc">
         <ShopItemFuncOutput />
       </Route>
-      <Route path="/calendar">
+      <Route exact path="/netology-react-hometasks/calendar">
         <Calendar />
       </Route>
     </Switch>
