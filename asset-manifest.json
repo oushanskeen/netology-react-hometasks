@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/oushanskeen/netology-react-hometasks/static/css/main.d60dbb93.chunk.css",
-    "main.js": "/oushanskeen/netology-react-hometasks/static/js/main.a1ac2770.chunk.js",
-    "main.js.map": "/oushanskeen/netology-react-hometasks/static/js/main.a1ac2770.chunk.js.map",
-    "runtime-main.js": "/oushanskeen/netology-react-hometasks/static/js/runtime-main.4fd2fd94.js",
-    "runtime-main.js.map": "/oushanskeen/netology-react-hometasks/static/js/runtime-main.4fd2fd94.js.map",
-    "static/js/2.1fb124fd.chunk.js": "/oushanskeen/netology-react-hometasks/static/js/2.1fb124fd.chunk.js",
-    "static/js/2.1fb124fd.chunk.js.map": "/oushanskeen/netology-react-hometasks/static/js/2.1fb124fd.chunk.js.map",
-    "static/js/3.8d0766a9.chunk.js": "/oushanskeen/netology-react-hometasks/static/js/3.8d0766a9.chunk.js",
-    "static/js/3.8d0766a9.chunk.js.map": "/oushanskeen/netology-react-hometasks/static/js/3.8d0766a9.chunk.js.map",
-    "index.html": "/oushanskeen/netology-react-hometasks/index.html",
-    "static/css/main.d60dbb93.chunk.css.map": "/oushanskeen/netology-react-hometasks/static/css/main.d60dbb93.chunk.css.map",
-    "static/js/2.1fb124fd.chunk.js.LICENSE.txt": "/oushanskeen/netology-react-hometasks/static/js/2.1fb124fd.chunk.js.LICENSE.txt",
-    "static/media/main.css": "/oushanskeen/netology-react-hometasks/static/media/item-blue.2103f69b.jpg"
+    "main.css": "/netology-react-hometasks/static/css/main.b4b0a08b.chunk.css",
+    "main.js": "/netology-react-hometasks/static/js/main.a1ac2770.chunk.js",
+    "main.js.map": "/netology-react-hometasks/static/js/main.a1ac2770.chunk.js.map",
+    "runtime-main.js": "/netology-react-hometasks/static/js/runtime-main.5b35edf4.js",
+    "runtime-main.js.map": "/netology-react-hometasks/static/js/runtime-main.5b35edf4.js.map",
+    "static/js/2.1fb124fd.chunk.js": "/netology-react-hometasks/static/js/2.1fb124fd.chunk.js",
+    "static/js/2.1fb124fd.chunk.js.map": "/netology-react-hometasks/static/js/2.1fb124fd.chunk.js.map",
+    "static/js/3.8d0766a9.chunk.js": "/netology-react-hometasks/static/js/3.8d0766a9.chunk.js",
+    "static/js/3.8d0766a9.chunk.js.map": "/netology-react-hometasks/static/js/3.8d0766a9.chunk.js.map",
+    "index.html": "/netology-react-hometasks/index.html",
+    "static/css/main.b4b0a08b.chunk.css.map": "/netology-react-hometasks/static/css/main.b4b0a08b.chunk.css.map",
+    "static/js/2.1fb124fd.chunk.js.LICENSE.txt": "/netology-react-hometasks/static/js/2.1fb124fd.chunk.js.LICENSE.txt",
+    "static/media/main.css": "/netology-react-hometasks/static/media/item-blue.2103f69b.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.4fd2fd94.js",
+    "static/js/runtime-main.5b35edf4.js",
     "static/js/2.1fb124fd.chunk.js",
-    "static/css/main.d60dbb93.chunk.css",
+    "static/css/main.b4b0a08b.chunk.css",
     "static/js/main.a1ac2770.chunk.js"
   ]
 }
