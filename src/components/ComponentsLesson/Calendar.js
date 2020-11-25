@@ -1,6 +1,8 @@
 //import React from "react";
 import "../../css/datepicker.css";
-
+import { cutMonthToWeeks  } from "./utils";
+import { calendarArray }  from "./calendarUtils";
+// db
 const weekDays = {
   Mon: ["Понедельник", "Пн"],
   Tue: ["Вторник", "Вт"],
@@ -26,8 +28,9 @@ const months = {
 };
 
 const now = new Date(2017, 2, 8);
-const current = () => {
-  const prepared = now.toString().split(" ");
+
+const serialiseDate = _now => {
+  const prepared = _now.toString().split(" ");
   return {
     weekDay: prepared[0],
     month: prepared[1],
@@ -36,22 +39,25 @@ const current = () => {
   };
 };
 
-const data = [
-  weekDays[current().weekDay][0],
-  current().date,
-  months[current().month][1],
-  current().year,
-  months[current().month][0],
-  current().year
-];
+const date = () => ({
+  weekday: weekDays[serialiseDate(now).weekDay][0],
+  day: serialiseDate(now).date,
+  monthClaim: months[serialiseDate(now).month][1],
+  year: serialiseDate(now).year,
+  monthDenote: months[serialiseDate(now).month][0]
+});
 
-const splittedMonth = [
-  [27, 28, 1, 2, 3, 4, 5],
-  [6, 7, 8, 9, 10, 11, 12],
-  [13, 14, 15, 16, 17, 18, 19],
-  [20, 21, 22, 23, 24, 25, 26],
-  [27, 28, 29, 30, 1, 2, 3]
+/*
+const pureMonth = [
+  27, 28, 1, 2, 3, 4, 5,
+  6, 7, 8, 9, 10, 11, 12,
+  13, 14, 15, 16, 17, 18, 19,
+  20, 21, 22, 23, 24, 25, 26,
+  27, 28, 29, 30, 1, 2, 3
 ];
+*/
+const pureMonth = calendarArray(date().year, date().month);
+console.log("pure month: ", cutMonthToWeeks(pureMonth,[]));
 /*
           <td className="ui-datepicker-other-month">27</td>
           <td className="ui-datepicker-other-month">28</td>
@@ -66,25 +72,25 @@ const splittedMonth = [
           <td>7</td>
           <td className="ui-datepicker-today">8</td>
 */
-const CalendarHead = () => (
+const CalendarHead = ({ date }) => (
   <>
     <div className="ui-datepicker-material-header">
-      <div className="ui-datepicker-material-day">{data[0]}</div>
+      <div className="ui-datepicker-material-day">{date().weekday}</div>
       <div className="ui-datepicker-material-date">
-        <div className="ui-datepicker-material-day-num">{data[1]}</div>
-        <div className="ui-datepicker-material-month">{data[2]}</div>
-        <div className="ui-datepicker-material-year">{data[3]}</div>
+        <div className="ui-datepicker-material-day-num">{date().day}</div>
+        <div className="ui-datepicker-material-month">{date().monthClaim}</div>
+        <div className="ui-datepicker-material-year">{date().year}</div>
       </div>
     </div>
     <div className="ui-datepicker-header">
       <div className="ui-datepicker-title">
-        <span className="ui-datepicker-month">{data[4]}</span>&nbsp;
-        <span class="ui-datepicker-year">{data[5]}</span>
+        <span className="ui-datepicker-month">{date().monthDenote}</span>&nbsp;
+        <span class="ui-datepicker-year">{date().year}</span>
       </div>
     </div>
   </>
 );
-const CalendarFoot = () => (
+const CalendarFoot = ({ date }) => (
   <table className="ui-datepicker-calendar">
     <colgroup>
       <col />
@@ -105,7 +111,7 @@ const CalendarFoot = () => (
       </tr>
     </thead>
     <tbody>
-      {splittedMonth.map(e => (
+      {cutMonthToWeeks(pureMonth,[]).map(e => (
         <tr>
           {e.map(ee => (
             <td>{ee}</td>
@@ -115,10 +121,10 @@ const CalendarFoot = () => (
     </tbody>
   </table>
 );
-const Calendar = () => (
+const Calendar = ({ _date }) => (
   <div className="ui-datepicker">
-    <CalendarHead />
-    <CalendarFoot />
+    <CalendarHead date={date} />
+    <CalendarFoot date={date} />
   </div>
 );
 

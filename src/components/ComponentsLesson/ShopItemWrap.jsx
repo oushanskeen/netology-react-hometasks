@@ -13,18 +13,18 @@ const item = {
   currency: "£"
 };
 
-export const ShopItemWrap = ({type}) => (
+export const ShopItemWrap = ({ type }) => (
   <div className="container">
     <div className="background-element"></div>
     <div className="highlight-window">
       <div className="highlight-overlay"></div>
     </div>
     <div className="window">
-    {
-      type === "fc"
-      ? <ShopItemFunc item={item}/>
-      : <ShopItemClass item={item}/>
-    }
+      {type === "fc" ? (
+        <ShopItemFunc item={item} />
+      ) : (
+        <ShopItemClass item={item} />
+      )}
     </div>
   </div>
 );
