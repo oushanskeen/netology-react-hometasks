@@ -1,7 +1,6 @@
 import React from "react";
-import { shallow /*, mount*/ } from "enzyme";
-import PropTypes from "prop-types";
-import "../css/main.css";
+import { shallow } from "enzyme";
+import { ShopItemFunc } from "./ShopItemFunc.jsx";
 
 const item = {
   brand: "Tiger of Sweden",
@@ -13,44 +12,6 @@ const item = {
   currency: "£"
 };
 const emptyItem = {};
-
-export const ShopItemFunc = ({ item }) => {
-  return item === undefined || Object.keys(item).length !== 6 ? (
-    <div>Pardon, something goes wrong!</div>
-  ) : (
-    <>
-      <h2 id="brand">{item.brand}</h2>
-      <h1 id="title">{item.title}</h1>
-      <h3 id="descriptionBrief">{item.description}</h3>
-      <div className="description">{item.descriptionFull}</div>
-      <div className="price">
-        {item.currency}
-        {item.price}.00
-      </div>
-    </>
-  );
-};
-
-ShopItemFunc.propTypes = {
-  item: PropTypes.shape({
-    brand: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    descriptionFull: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    currency: PropTypes.string.isRequired
-  })
-}
-ShopItemFunc.defaulrProps = {
-  item: {
-    brand: "Pardon",
-    title: "moi!",
-    description: "Something",
-    descriptionFull: "goes",
-    price: "!",
-    currency: "wrong"
-  }
-}
 
 describe("<ShopItemFunc/> with no given props", () => {
   it("renders pardon message with no give props", () => {
@@ -118,4 +79,3 @@ describe("<ShopItemFunc/> with data", () => {
     );
   });
 });
-

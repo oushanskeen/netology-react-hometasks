@@ -1,20 +1,22 @@
 //import logo from './logo.svg';
 import "./css/main.css";
-import { ShopItemFuncOutput } from "./components/ShopItem.jsx";
-import Calendar from "./components/Calendar";
-import {
-  Route,
-  Switch,
-  BrowserRouter as Router,
-  Link
-} from "react-router-dom";
+import { ShopItemWrap } from "./components/ComponentsLesson/ShopItemWrap.jsx";
+import Calendar from "./components/ComponentsLesson/Calendar";
+import { Route, Switch, BrowserRouter as Router, Link } from "react-router-dom";
 
 const App = () => (
   <Router>
     <div className="nav-bar">
-      <ul> components:
+      <ul>
+        {" "}
+        components:
         <li>
-          <Link to="/netology-react-hometasks/shopitemfunc">ShopItemFuncOutput</Link>
+          <Link to="/netology-react-hometasks/shopitemfunc">ShopItemFunc</Link>
+        </li>
+        <li>
+          <Link to="/netology-react-hometasks/shopitemclass">
+            ShopItemClass
+          </Link>
         </li>
         <li>
           <Link to="/netology-react-hometasks/calendar">Calendar</Link>
@@ -23,7 +25,10 @@ const App = () => (
     </div>
     <Switch>
       <Route exact path="/netology-react-hometasks/shopitemfunc">
-        <ShopItemFuncOutput />
+        <ShopItemWrap type="fc"/>
+      </Route>
+      <Route exact path="/netology-react-hometasks/shopitemclass">
+        <ShopItemWrap />
       </Route>
       <Route exact path="/netology-react-hometasks/calendar">
         <Calendar />
