@@ -6,9 +6,10 @@ import { Route, Switch, BrowserRouter as Router, Link } from "react-router-dom";
 import { Stars } from "./components/PropsLesson/Stars.jsx";
 import { Listing } from "./components/PropsLesson/Listing.jsx";
 import { MessageHistory } from "./components/PropsLesson/MessageHistory.jsx";
-import {Portfolio} from "./components/EventAndState/Portfolio.jsx";
-import {Store} from "./components/EventAndState/Store.jsx";
-import {DropdownList} from "./components/EventAndState/DropdownList.jsx";
+import { Portfolio } from "./components/EventAndState/Portfolio.jsx";
+import { Store } from "./components/EventAndState/Store.jsx";
+import { Converter } from "./components/Forms/RgbToHex.jsx";
+import {FitnessTracker} from "./components/Forms/FitnessTracker.jsx";
 
 const App = () => (
   <Router>
@@ -40,14 +41,28 @@ const App = () => (
       </ul>
       <ul>
         {" "}
-          events and state:
+        events and state:
         <li>
           <Link to="/netology-react-hometasks/portfolio">Portfolio</Link>
-         </li>
+        </li>
         <li>
-            <Link to="/netology-react-hometasks/store">Store</Link>
-         </li>
+          <Link to="/netology-react-hometasks/store">Store</Link>
+        </li>
         <li>DropdownList</li>
+      </ul>
+      <ul>
+        {" "}
+        forms:
+        <li>
+          <Link to="/netology-react-hometasks/converter">
+            Hex to rgb converter
+          </Link>
+        </li>
+        <li>
+          <Link to="/netology-react-hometasks/fitnesstracker">
+            Fitness tracker
+          </Link>
+        </li>
       </ul>
     </div>
     <Switch>
@@ -70,13 +85,19 @@ const App = () => (
         <MessageHistory />
       </Route>
       <Route exact path="/netology-react-hometasks/portfolio">
-        <Portfolio/>
+        <Portfolio />
       </Route>
       <Route exact path="/netology-react-hometasks/store">
-        <Store/>
+        <Store />
       </Route>
       <Route exact path="/netology-react-hometasks/dropdown">
         Dropdown
+      </Route>
+      <Route exact path="/netology-react-hometasks/converter">
+        <Converter />
+      </Route>
+      <Route exact path="/netology-react-hometasks/fitnesstracker">
+        <FitnessTracker />
       </Route>
     </Switch>
   </Router>
