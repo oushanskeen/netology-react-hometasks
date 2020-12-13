@@ -9,7 +9,11 @@ import { MessageHistory } from "./components/PropsLesson/MessageHistory.jsx";
 import { Portfolio } from "./components/EventAndState/Portfolio.jsx";
 import { Store } from "./components/EventAndState/Store.jsx";
 import { Converter } from "./components/Forms/RgbToHex.jsx";
-import {FitnessTracker} from "./components/Forms/FitnessTracker.jsx";
+import { FitnessTracker } from "./components/Forms/FitnessTracker.jsx";
+import { Yandex } from "./components/Decomposition/Yandex.jsx";
+import { Cards } from "./components/Decomposition/Cards.jsx";
+import { Worldtime } from "./components/CompLifeAndHTTP/Worldtime.jsx";
+import { Crud } from "./components/CompLifeAndHTTP/Crud";
 
 const App = () => (
   <Router>
@@ -64,6 +68,22 @@ const App = () => (
           </Link>
         </li>
       </ul>
+      <ul>
+        {" "}
+        forms:
+        <li>
+          <Link to="/netology-react-hometasks/cards">Cards</Link>
+        </li>
+        <li>
+          <Link to="/netology-react-hometasks/yandex">Yandex</Link>
+        </li>
+      </ul>
+      <ul>
+        <li>Worldtime</li>
+        <li>
+          <Crud />
+        </li>
+      </ul>
     </div>
     <Switch>
       <Route exact path="/netology-react-hometasks/shopitemfunc">
@@ -98,6 +118,12 @@ const App = () => (
       </Route>
       <Route exact path="/netology-react-hometasks/fitnesstracker">
         <FitnessTracker />
+      </Route>
+      <Route exact path="/netology-react-hometasks/cards">
+        <Cards />
+      </Route>
+      <Route exact path="/netology-react-hometasks/yandex">
+        <Yandex />
       </Route>
     </Switch>
   </Router>

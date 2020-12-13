@@ -19,8 +19,8 @@ const wrapper = {
   gap: "10px",
   gridAutoRows: "minmax(100px, auto)",
   width: "500px",
-  paddingTop:130,
-  paddingLeft:10
+  paddingTop: 130,
+  paddingLeft: 10
 };
 const box = {
   border: "2px solid black",
@@ -28,7 +28,7 @@ const box = {
 };
 const button = {
   marginTop: 5
-}
+};
 export const FitnessTracker = () => {
   const [model, setModel] = useState({ ...sampleData });
   const updateModel = (msg, payload) => {
@@ -83,7 +83,7 @@ export const FitnessTracker = () => {
   return (
     <div style={wrapper}>
       <div>
-        <div style={{...box, padding:10}}>
+        <div style={{ ...box, padding: 10 }}>
           <div>
             <label>дата</label>
           </div>
@@ -104,26 +104,31 @@ export const FitnessTracker = () => {
               onChange={e => updateModel("STEPS_INPUT", e.target.value)}
             />
           </div>
-      <div>
-      {!model.stateOnAdd ? (
-        <button onClick={() => updateModel("ON_SAVE_EDIT")} style={button}>ok</button>
-      ) : (
-        <button
-          disabled={!model.stateOnAdd}
-          onClick={() => updateModel("ON_ADD_RECORD", model.formData)}
-          style={button}
-        >
-          ok
-        </button>
-      )}
+          <div>
+            {!model.stateOnAdd ? (
+              <button
+                onClick={() => updateModel("ON_SAVE_EDIT")}
+                style={button}
+              >
+                ok
+              </button>
+            ) : (
+              <button
+                disabled={!model.stateOnAdd}
+                onClick={() => updateModel("ON_ADD_RECORD", model.formData)}
+                style={button}
+              >
+                ok
+              </button>
+            )}
+          </div>
         </div>
-      </div>
       </div>
       <div style={box}>
         {model.logData.map((e, i) => (
           <div>
-              <span> {e.date} </span>
-              <span> {e.steps} </span>
+            <span> {e.date} </span>
+            <span> {e.steps} </span>
             <span onClick={() => updateModel("ON_EDIT", e)}> ✎ </span>
             <span onClick={() => updateModel("ON_DELETE", e)}> ✘ </span>
           </div>
