@@ -14,74 +14,24 @@ import { Yandex } from "./components/Decomposition/Yandex.jsx";
 import { Cards } from "./components/Decomposition/Cards.jsx";
 import { Worldtime } from "./components/CompLifeAndHTTP/Worldtime.jsx";
 import { Crud } from "./components/CompLifeAndHTTP/Crud";
+import { PrettyDate } from "./components/HOC/PrettyDate";
+import { Popularnew } from "./components/HOC/Popularnew.jsx";
 
 const App = () => (
   <Router>
-    <div className="nav-bar" style={{ display: "flex" }}>
+    <div className="nav-bar" style={{ display: "flex", paddingLeft:100, margin:0 }}>
       <ul>
         {" "}
-        components:
+        lifetime and HTTP:
         <li>
-          <Link to="/netology-react-hometasks/shopitemfunc">ShopItemFunc</Link>
-        </li>
-        <li>
-          <Link to="/netology-react-hometasks/shopitemclass">
-            ShopItemClass
+          <Link to="/netology-react-hometasks/worldtime">
+            Worldtime
           </Link>
         </li>
         <li>
-          <Link to="/netology-react-hometasks/calendar">Calendar</Link>
-        </li>
-      </ul>
-      <ul>
-        {" "}
-        props:
-        <li>
-          <Link to="/netology-react-hometasks/stars">Stars</Link>
-        </li>
-        <li>
-          <Link to="/netology-react-hometasks/listing">Listing</Link>
-        </li>
-      </ul>
-      <ul>
-        {" "}
-        events and state:
-        <li>
-          <Link to="/netology-react-hometasks/portfolio">Portfolio</Link>
-        </li>
-        <li>
-          <Link to="/netology-react-hometasks/store">Store</Link>
-        </li>
-        <li>DropdownList</li>
-      </ul>
-      <ul>
-        {" "}
-        forms:
-        <li>
-          <Link to="/netology-react-hometasks/converter">
-            Hex to rgb converter
+          <Link to="/netology-react-hometasks/crud">
+            Crud
           </Link>
-        </li>
-        <li>
-          <Link to="/netology-react-hometasks/fitnesstracker">
-            Fitness tracker
-          </Link>
-        </li>
-      </ul>
-      <ul>
-        {" "}
-        forms:
-        <li>
-          <Link to="/netology-react-hometasks/cards">Cards</Link>
-        </li>
-        <li>
-          <Link to="/netology-react-hometasks/yandex">Yandex</Link>
-        </li>
-      </ul>
-      <ul>
-        <li>Worldtime</li>
-        <li>
-          <Crud />
         </li>
       </ul>
     </div>
@@ -124,6 +74,12 @@ const App = () => (
       </Route>
       <Route exact path="/netology-react-hometasks/yandex">
         <Yandex />
+      </Route>
+      <Route exact path="/netology-react-hometasks/worldtime">
+        <Worldtime />
+      </Route>
+      <Route exact path="/netology-react-hometasks/crud">
+        <Crud/> 
       </Route>
     </Switch>
   </Router>
