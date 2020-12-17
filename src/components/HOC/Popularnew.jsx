@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import "./popularnew.css";
 
-const New = (props) => {
+const New = ({ child }) => {
   return (
     <div className="wrap-item wrap-item-new">
       <span className="label">New!</span>
-      {props.children}
+      {child}
     </div>
   );
-}
+};
 
-const  Popular = (props) => {
+const Popular = ({ child }) => {
   return (
     <div className="wrap-item wrap-item-popular">
       <span className="label">Popular!</span>
-      {props.children}
+      {child}
     </div>
   );
-}
+};
 
-const Article = (props) => {
+const Article = props => {
   return (
     <div className="item item-article">
       <h3>
@@ -28,9 +28,17 @@ const Article = (props) => {
       <p className="views">Прочтений: {props.views}</p>
     </div>
   );
-}
-
-const Video = (props) => {
+};
+const marker = (comp, views) => {
+  return views > 1000 ? (
+    <Popular child={comp} />
+  ) : views < 100 ? (
+    <New chil={comp} />
+  ) : (
+    comp
+  );
+};
+const Video = props => {
   return (
     <div className="item item-video">
       <iframe
@@ -42,20 +50,31 @@ const Video = (props) => {
       <p className="views">Просмотров: {props.views}</p>
     </div>
   );
-}
+};
 
 function List(props) {
   return props.list.map(item => {
     switch (item.type) {
       case "video":
-        return <Video {...item} />;
-
+        return marker(<Video {...item} />, item.views);
       case "article":
-        return <Article {...item} />;
+        return marker(<Article {...item} />, item.views);
+      default:
+        return;
     }
   });
 }
-
+const box = {
+  display:"flex",
+  flexDirection:"column",
+  margin:0,
+  paddingTop:120
+};
+const Wrapper = ({child}) => (
+  <div style={box}>
+    {child}
+  </div>
+);
 export function Popularnew() {
   const [list, setList] = useState([
     {
@@ -93,5 +112,5 @@ export function Popularnew() {
     }
   ]);
 
-  return <List list={list} />;
+  return <Wrapper child={<List list={list} />}/>;
 }

@@ -16,22 +16,32 @@ import { Worldtime } from "./components/CompLifeAndHTTP/Worldtime.jsx";
 import { Crud } from "./components/CompLifeAndHTTP/Crud";
 import { PrettyDate } from "./components/HOC/PrettyDate";
 import { Popularnew } from "./components/HOC/Popularnew.jsx";
+import { Useeffect } from "./components/Hooks/Useeffect.jsx";
 
 const App = () => (
   <Router>
-    <div className="nav-bar" style={{ display: "flex", paddingLeft:100, margin:0 }}>
+    <div
+      className="nav-bar"
+      style={{ display: "flex", paddingLeft: 100, margin: 0 }}
+    >
       <ul>
         {" "}
         lifetime and HTTP:
         <li>
-          <Link to="/netology-react-hometasks/worldtime">
-            Worldtime
-          </Link>
+          <Link to="/netology-react-hometasks/worldtime">Worldtime</Link>
         </li>
         <li>
-          <Link to="/netology-react-hometasks/crud">
-            Crud
-          </Link>
+          <Link to="/netology-react-hometasks/crud">Crud</Link>
+        </li>
+      </ul>
+      <ul>
+        {" "}
+        HOC
+        <li>
+          <Link to="/netology-react-hometasks/prettydate">PrettyDate</Link>
+        </li>
+        <li>
+          <Link to="/netology-react-hometasks/popularnew">Popularnew</Link>
         </li>
       </ul>
     </div>
@@ -79,7 +89,13 @@ const App = () => (
         <Worldtime />
       </Route>
       <Route exact path="/netology-react-hometasks/crud">
-        <Crud/> 
+        <Crud />
+      </Route>
+      <Route exact path="/netology-react-hometasks/prettydate">
+        <PrettyDate />
+      </Route>
+      <Route exact path="/netology-react-hometasks/popularnew">
+        <Popularnew />
       </Route>
     </Switch>
   </Router>
