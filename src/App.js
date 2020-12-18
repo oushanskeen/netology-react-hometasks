@@ -22,8 +22,14 @@ const App = () => (
   <Router>
     <div
       className="nav-bar"
-      style={{ display: "flex", paddingLeft: 100, margin: 0 }}
+      style={{ display: "flex", paddingLeft: 10, width:"100%", margin: 0 }}
     >
+      <ul>
+        {" "}
+        <li>
+          <Link to="/netology-react-hometasks/fittrack">Fittness Tracker</Link>
+        </li>
+      </ul>
       <ul>
         {" "}
         lifetime and HTTP:
@@ -96,6 +102,9 @@ const App = () => (
       </Route>
       <Route exact path="/netology-react-hometasks/popularnew">
         <Popularnew />
+      </Route>
+      <Route exact path="/netology-react-hometasks/fittrack">
+        <FitnessTracker />
       </Route>
     </Switch>
   </Router>

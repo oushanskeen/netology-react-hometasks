@@ -9,8 +9,10 @@ const isObjByKeyHere = (_pool, _obj) => {
   const objHeadKeys = Object.values(_obj)[0];
   return poolHeadKeys.includes(objHeadKeys);
 };
+const DateToNum = (x) => new Date(x.split(".").reverse()).getTime();
 const headKey = _obj => Object.values(_obj)[0];
-const sortByHeadKey = (_obj) => _obj.sort((a,b) => headKey(a) < headKey(b) ? 1 : -1 );
+const sortByHeadKey = (_obj) => 
+  _obj.sort((a,b) => DateToNum(headKey(a)) < DateToNum(headKey(b)) ? 1 : -1 );
 const tail = _obj => Object.entries(_obj)[1];
 const addObj = (_pool, _inObj) => {
   return sortByHeadKey([..._pool, _inObj]);

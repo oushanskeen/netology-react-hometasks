@@ -13,6 +13,7 @@ const sampleData = {
   ],
   stateOnAdd: true // if false, state ON EDIT
 };
+const compare = (x) => +(x.split(".").join());
 const wrapper = {
   display: "grid",
   gridTemplateColumns: "1fr",
@@ -20,7 +21,7 @@ const wrapper = {
   gridAutoRows: "minmax(100px, auto)",
   width: "500px",
   paddingTop: 130,
-  paddingLeft: 10
+  paddingLeft: 50
 };
 const box = {
   border: "2px solid black",
