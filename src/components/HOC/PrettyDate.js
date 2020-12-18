@@ -10,13 +10,10 @@ export const DateTimeLocal = ({ time = new Date().toString() }) => (
 );
 const oldDate = "2020-12-15T17:25:10";
 const prettifier = (_time = oldDate) => moment(_time).fromNow();
-export const PrettyDateLocal = ({ prettyTime = prettifier() }) => (
-  <DateTimeLocal time={prettyTime} />
-);
 
 const DateTime = props => <p className="date">{props.date}</p>;
 const DateTimePretty = ({prettifier, date}) => 
-  <DateTime date={date}/>
+  <DateTime date={prettifier(date)}/>
 const Video = props => (
     <div className="video">
       <iframe
@@ -25,7 +22,7 @@ const Video = props => (
         allow="autoplay; encrypted-media"
         allowfullscreen
       ></iframe>
-      <DateTimePretty date={prettifier(props.date)}/>
+      <DateTimePretty prettifier={prettifier} date={props.date}/>
     </div>
   );
 
