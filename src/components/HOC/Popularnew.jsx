@@ -29,13 +29,13 @@ const Article = props => {
     </div>
   );
 };
-const marker = (comp, views) => {
+const Marker = ({child, views}) => {
   return views > 1000 ? (
-    <Popular child={comp} />
+    <Popular child={child} />
   ) : views < 100 ? (
-    <New chil={comp} />
+    <New child={child} />
   ) : (
-    comp
+    child
   );
 };
 const Video = props => {
@@ -56,9 +56,9 @@ function List(props) {
   return props.list.map(item => {
     switch (item.type) {
       case "video":
-        return marker(<Video {...item} />, item.views);
+        return <Marker child={<Video {...item} />} views={item.views}/>;
       case "article":
-        return marker(<Article {...item} />, item.views);
+        return <Marker child={<Article {...item} />} views={item.views}/>;
       default:
         return;
     }
