@@ -7,134 +7,96 @@ const sampleModel = [
   { id: 3, content: "stub task four" }
 ];
 
+const box = {
+  display: "flex",
+  width: "300px",
+  justifyContent: "space-between"
+};
 export const Crud = ({ modelIn = sampleModel }) => {
+  /*
   const [loadError, setloadError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [model, setModel] = useState([]);
   const [action, setAction] = useState([]);
   const [newTask, setNewTask] = useState("");
+  */
+  const [state, setState] = useState({
+    model: [],
+    inputState: "",
+    newTask: "",
+    isOnDelete: 0,
+    isReset: false
+  });
+  const {
+    model,
+    inputState,
+    newTask,
+    isTaskAdded,
+    isOnDelete,
+    isReset
+  } = state;
 
-  //console.log("NEW TASK INPUT FILED VALUE:", newTask);
-  const dispatch = (message, payload) => {
-    console.log("DIPSPATCHER RECEIVES: ", message, payload);
-    console.log("MODELLLLL:", model);
-    switch (message) {
-      case "GET":
-        fetch("http://127.0.0.1:7777/notes", { method: "GET" })
-          .then(res => res.json())
-          .then(data => {
-            setIsLoaded(true);
-            console.log("DATA AFTER LOAD: ", data);
-            setModel(data);
-          });
-        return;
-      case "DELETE":
-        fetch(`http://127.0.0.1:7777/notes?id=${payload}`, { method: "DELETE" })
-          .then(res => res.json())
-          .then(data => {
-            setIsLoaded(true);
-            console.log("DATA ON DELETE: ", data);
-            setModel(data);
-          });
-        return;
-      case "POST":
-        fetch(
-          `http://127.0.0.1:7777/notes?task=${JSON.stringify({
-            id: Date.now(),
-            content: payload
-          })}`,
-          { method: "POST" }
-        )
-          .then(res => res.json())
-          .then(data => {
-            setIsLoaded(true);
-            setModel(JSON.parse(data));
-          });
-        return;
-      default:
-        return;
+  useEffect(() => {
+    if (isReset === true || model.length < 1) {
+      fetch("http://localhost:7777/notes")
+        .then(res => res.json())
+        .then(data =>
+          setState({ ...state, model: [...data], isReset: !isReset })
+        );
     }
-  };
-
-  const box = {
-    display: "flex",
-    //border: "2px solid grey"
-  };
-  const cardStyle = {
-    width: 250,
-    height: 150,
-    padding: 0
-  };
-  const Card = ({ data }) => (
-    <div
-      style={{
-        ...box,
-        flexDirection: "column",
-        width: "100%",
-        height: "100%",
-        margin: 10
-      }}
-    >
-      <div>
-        <div
-          style={{
-            ...box,
-            justifyContent: "end",
-            paddingRight: 10,
-            borderColor: "lightGrey"
-          }}
-          onClick={() => setAction(["DELETE", data.id])}
-        >
-          <b>x</b>
-        </div>
-        <div style={{ ...box, width: "100%", height: "100%", padding: 10 }}>
-          {data.content}
-        </div>
-      </div>
+  }, [/*isReset]*/]);
+  useEffect(() => {
+    if (newTask !== "") {
+      fetch("http://localhost:7777/notes", { method: "POST", body: newTask })
+        .then(data => fetch("http://localhost:7777/notes"))
+        .then(res => res.json())
+        .then(data => setState({ ...state, model: [...data] }));
+    }
+  }, [newTask]);
+  useEffect(() => {
+    if (isOnDelete !== 0) {
+      fetch(`http://localhost:7777/notes/${isOnDelete}`, { method: "DELETE" })
+        .then(data => fetch("http://localhost:7777/notes"))
+        .then(res => res.json())
+        .then(data => setState({ ...state, model: [...data] }));
+    }
+  }, [isOnDelete]);
+  const Task = ({ task }) => (
+    <div style={box}>
+      <div> {JSON.stringify(task)} </div>
+      <button onClick={() => setState({ ...state, isOnDelete: task.id })}>
+        {" "}
+        x{" "}
+      </button>
     </div>
   );
-  useEffect(() => {
-    if (model.length === 0) {
-      dispatch("GET");
-    }
-    switch (action[0]) {
-      case "GET":
-        dispatch("GET");
-        setAction([]);
-        return;
-      case "POST":
-        console.log("ON POST action: ", action);
-        dispatch("POST", action[1]);
-        setNewTask([]);
-        setAction([]);
-        return;
-      case "DELETE":
-        dispatch("DELETE", action[1]);
-        setAction([]);
-        return;
-      default:
-        return;
-    }
-  }, [model, action]);
+  const TasksList = () =>
+    model === undefined ? (
+      <div>pardon, no tasks</div>
+    ) : (
+      model.map(e => <Task task={e} />)
+    );
   return (
-    <div
-      style={{ ...box, flexDirection: "column", margin: 0, paddingTop: 200 }}
-    >
-      <button onClick={() => setAction(["GET"])}>RELOAD</button>
-      <div style={{ ...box, padding: 10 }}>
-        <label>
+    <div style={{paddingTop:120}}>
+    {/*<div>{JSON.stringify(state)}</div>*/}
+      <button onClick={() => setState({ ...state, isReset: !isReset })}>
+        reset
+      </button>
+      <div>
+        <input
+          value={inputState}
+          onChange={e => setState({ ...state, inputState: e.target.value })}
+        />
+       {/*<div>input state: {inputState}</div>*/}
+        <button
+          onClick={() =>
+            setState({ ...state, newTask: inputState, inputState: "" })
+          }
+        >
           add task
-          <input
-            name="newTask"
-            value={newTask}
-            onChange={e => setNewTask(e.target.value)}
-          />
-          <button onClick={() => setAction(["POST", newTask])}>add</button>
-        </label>
+        </button>
       </div>
-      {model.map(e => (
-        <Card data={e} />
-      ))}
+      <TasksList />
     </div>
   );
 };

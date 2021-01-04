@@ -1,79 +1,103 @@
 import { useState, useEffect, useRef } from "react";
 
-const sampleNames = [
-  { name: "name one", isSelected: true },
-  { name: "name two", isSelected: false },
-  { name: "name three", isSelected: false }
-];
 const url =
   "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/users.json";
-const idUrl = (id) => `https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/${id}.json`;
+const idUrl = id =>
+  `https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/${id}.json`;
 
-
+const box = {
+  display: "flex",
+  flexDirection: "column",
+  //border: "2px solid grey",
+  padding: 10
+};
 export const Useeffect = () => {
   const [model, setModel] = useState({
-    names: [...sampleNames],
-    namesp: [],
-    chosenId:"",
-    currentId:"",
-    hookCalls:0,
-    info:[]
+    names: [],
+    chosenId: "",
+    currentId: "",
+    hookCalls: 0,
+    info: []
   });
-  const { names, currentId, chosenId } = model;
+  console.log("MODEL STATE: ", model);
+  const addIfUnique = (_pool, _actor) => {
+    const isHere = _pool.filter((e, i) => e.id === _actor.id /* ? _pool : i*/);
+    return isHere.length === 0 ? [..._pool, { ..._actor }] : [..._pool];
+  };
+  const { names, chosenId } = model;
   useEffect(() => {
     fetch(url)
       .then(res => res.json())
       .then(data => {
-        console.log("ON DATA FETCH: ", data);
-        setModel({ ...model, names: [...data],hookCalls: model.hookCalls += 1 });
-        console.log("MODEL: ", model);
-    });
-    /*
-     *savefetched data in array and then fetch only new
-     * */
-    fetch(idUrl(chosenId))
-    .then(res => res.json())
-    .then(data => {
-     console.log("DATA FETCH ON DETAILS: ", data)
-      setModel(
-        {...model,currentId:data, hookCalls: model.hookCalls += 1}
-      )
-    });
-  }
-
-    , []);
+        setModel({
+          ...model,
+          names: [...data]
+          //hookCalls: (model.hookCalls += 1)
+        });
+      });
+  }, []);
   const List = () => (
     <div>
       {names.map(e => (
-        <div 
-          onClick={
-            ()=> {
-            console.log("CLICKED NAME: ", e);
-            setModel({...model, chosenId:e.id})
-            console.log("MODEL AFTER CHOOSE: ", model)
-          }
-            
-          }
+        <div
+          style={box}
+          onClick={() => {
+            setModel({ ...model, chosenId: e.id });
+          }}
         >
           {e.name}
         </div>
       ))}
     </div>
   );
-  const Details = ({ info }) => (
-    <div>
-      <div>{info.id}</div>
-      <div>{JSON.stringify(info.name)}</div>
-    </div>
-  );
+  const Details = ({ info }) => {
+    const [detailsId, setDetailsId] = useState(info.id);
+    useEffect(() => {
+      if (model.info.filter(e => +e.id === detailsId).length === 0) {
+        fetch(idUrl(detailsId))
+          .then(res => res.json())
+          .then(data => {
+            setModel({
+              ...model,
+              hookCalls: (model.hookCalls += 1),
+              info: [...model.info, { ...data }]
+            });
+          });
+      }
+    }, [detailsId]);
+    return (
+      <div style={{ ...box, padding: 0 }}>
+        {/*<div>{JSON.stringify(info.name)}</div>*/}
+        {info.name === undefined ? (
+          "loading..."
+        ) : (
+          <div>
+            <div style={box}>{info.name.name}</div>
+            <div style={box}>City : {info.name.details.city}</div>
+            <div style={box}>Company : {info.name.details.company}</div>
+            <div style={box}>Position : {info.name.details.position}</div>
+          </div>
+        )}
+      </div>
+    );
+  };
   return (
-    <div>
-      use your effect
-      <div>
+    <div style={{ ...box, flexDirection: "row", paddingTop:120 }}>
+    {/*<div>hook calls: {model.hookCalls}</div>*/}
+      <div style={{ ...box, width: "300px" }}>
         <List />
       </div>
-      <div>
-        <Details info={{id:chosenId, name:currentId}} />
+      <div style={{ ...box, width: "300px" }}>
+        {model.chosenId !== "" ? (
+          <Details
+            info={{
+              id: chosenId,
+              name: model.info.filter(e => e.id === chosenId)[0]
+            }}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

@@ -17,6 +17,8 @@ import { Crud } from "./components/CompLifeAndHTTP/Crud";
 import { PrettyDate } from "./components/HOC/PrettyDate";
 import { Popularnew } from "./components/HOC/Popularnew.jsx";
 import { Useeffect } from "./components/Hooks/Useeffect.jsx";
+import { UseJsonFetch } from "./components/Hooks/UseJsonFetch.jsx";
+
 
 const App = () => (
   <Router>
@@ -24,12 +26,6 @@ const App = () => (
       className="nav-bar"
       style={{ display: "flex", paddingLeft: 10, width:"100%", margin: 0 }}
     >
-      <ul>
-        {" "}
-        <li>
-          <Link to="/netology-react-hometasks/fittrack">Fittness Tracker</Link>
-        </li>
-      </ul>
       <ul>
         {" "}
         lifetime and HTTP:
@@ -42,13 +38,29 @@ const App = () => (
       </ul>
       <ul>
         {" "}
-        HOC
+        HOC:
         <li>
           <Link to="/netology-react-hometasks/prettydate">PrettyDate</Link>
         </li>
         <li>
           <Link to="/netology-react-hometasks/popularnew">Popularnew</Link>
         </li>
+      </ul>
+      <ul>
+        {" "}
+        Hooks:
+        <li>
+          <Link to="/netology-react-hometasks/useeffect">useEffect</Link>
+        </li>
+        <li>
+          <Link to="/netology-react-hometasks/usejsonfetch">useJsonFetch</Link>
+        </li>
+      </ul>
+      <ul>
+        Crud
+      </ul>
+      <ul>
+        <useJsonFetch/>
       </ul>
     </div>
     <Switch>
@@ -105,6 +117,12 @@ const App = () => (
       </Route>
       <Route exact path="/netology-react-hometasks/fittrack">
         <FitnessTracker />
+      </Route>
+      <Route exact path="/netology-react-hometasks/useeffect">
+        <Useeffect />
+      </Route>
+      <Route exact path="/netology-react-hometasks/usejsonfetch">
+        <UseJsonFetch />
       </Route>
     </Switch>
   </Router>
