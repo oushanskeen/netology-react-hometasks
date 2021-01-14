@@ -19,62 +19,56 @@ const Popular = ({ child }) => {
   );
 };
 
-const Article = props => {
+const Article = ({title,views}) => {
   return (
     <div className="item item-article">
       <h3>
-        <a href="#">{props.title}</a>
+        <a href="#">{title}</a>
       </h3>
-      <p className="views">Прочтений: {props.views}</p>
+      <p className="views">Прочтений: {views}</p>
     </div>
   );
 };
-const Marker = ({child, views}) => {
-  return views > 1000 ? (
-    <Popular child={child} />
-  ) : views < 100 ? (
-    <New child={child} />
-  ) : (
-    child
-  );
-};
-const Video = props => {
+const Video = ({url,views}) => {
   return (
     <div className="item item-video">
       <iframe
-        src={props.url}
+        src={url}
         frameborder="0"
         allow="autoplay; encrypted-media"
         allowfullscreen
+        title=""
       ></iframe>
-      <p className="views">Просмотров: {props.views}</p>
+      <p className="views">Просмотров: {views}</p>
     </div>
   );
 };
-
-function List(props) {
-  return props.list.map(item => {
-    switch (item.type) {
-      case "video":
-        return <Marker child={<Video {...item} />} views={item.views}/>;
-      case "article":
-        return <Marker child={<Article {...item} />} views={item.views}/>;
-      default:
-        return;
-    }
-  });
-}
-const box = {
-  display:"flex",
-  flexDirection:"column",
-  margin:0,
-  paddingTop:120
+const withPopular = Component => ({views}) => { 
+  console.log("Hello me inside wrapper hoc");
+  return (views > 1000
+  ? <New child={Component} />  
+    : views < 100
+      ? <Popular child={Component} />
+      : Component
+  );
 };
-const Wrapper = ({child}) => (
-  <div style={box}>
-    {child}
-  </div>
-);
+const List = ({list}) => {
+    return list.map(item => {
+        switch (item.type) {
+            case 'video':
+                console.log("Hello me inside list switcher");
+                return (
+                    withPopular(<Video {...item} />)({...item})
+                );
+            case 'article':
+                return (
+                    withPopular(<Article {...item} />)({...item})
+                );
+          default: return;
+        }
+    });
+};
+
 export function Popularnew() {
   const [list, setList] = useState([
     {
@@ -112,5 +106,5 @@ export function Popularnew() {
     }
   ]);
 
-  return <Wrapper child={<List list={list} />}/>;
+  return <List list={list}/>;
 }

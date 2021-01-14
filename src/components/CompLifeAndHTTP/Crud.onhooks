@@ -30,33 +30,44 @@ export const Crud = ({ modelIn = sampleModel }) => {
   const {
     model,
     inputState,
-    //newTask,
-    //isTaskAdded,
-    //isOnDelete,
+    newTask,
+    isTaskAdded,
+    isOnDelete,
     isReset
   } = state;
 
-  // fetch handlers
-  //useEffect(() => {
-  //if (isReset === true || model.length < 1) {
-  const fetchNotes = () =>
-    fetch("http://localhost:7777/notes")
-      .then(res => res.json())
-      .then(data => setState({ ...state, model: [...data] }));
-  const addNote = newNote =>
-    fetch("http://localhost:7777/notes", {
-      method: "POST",
-      body: newNote
-    }).then(data => fetchNotes());
-  const deleteNote = id =>
-    fetch(`http://localhost:7777/notes/${id}`, {
-      method: "DELETE"
-    }).then(data => fetchNotes());
-
+  useEffect(() => {
+    if (isReset === true || model.length < 1) {
+      fetch("http://localhost:7777/notes")
+        .then(res => res.json())
+        .then(data =>
+          setState({ ...state, model: [...data], isReset: !isReset })
+        );
+    }
+  }, [/*isReset]*/]);
+  useEffect(() => {
+    if (newTask !== "") {
+      fetch("http://localhost:7777/notes", { method: "POST", body: newTask })
+        .then(data => fetch("http://localhost:7777/notes"))
+        .then(res => res.json())
+        .then(data => setState({ ...state, model: [...data] }));
+    }
+  }, [newTask]);
+  useEffect(() => {
+    if (isOnDelete !== 0) {
+      fetch(`http://localhost:7777/notes/${isOnDelete}`, { method: "DELETE" })
+        .then(data => fetch("http://localhost:7777/notes"))
+        .then(res => res.json())
+        .then(data => setState({ ...state, model: [...data] }));
+    }
+  }, [isOnDelete]);
   const Task = ({ task }) => (
     <div style={box}>
       <div> {JSON.stringify(task)} </div>
-      <button onClick={() => deleteNote(task.id)}> x </button>
+      <button onClick={() => setState({ ...state, isOnDelete: task.id })}>
+        {" "}
+        x{" "}
+      </button>
     </div>
   );
   const TasksList = () =>
@@ -66,8 +77,8 @@ export const Crud = ({ modelIn = sampleModel }) => {
       model.map(e => <Task task={e} />)
     );
   return (
-    <div style={{ paddingTop: 120 }}>
-      {/*<div>{JSON.stringify(state)}</div>*/}
+    <div style={{paddingTop:120}}>
+    {/*<div>{JSON.stringify(state)}</div>*/}
       <button onClick={() => setState({ ...state, isReset: !isReset })}>
         reset
       </button>
@@ -76,12 +87,11 @@ export const Crud = ({ modelIn = sampleModel }) => {
           value={inputState}
           onChange={e => setState({ ...state, inputState: e.target.value })}
         />
-        {/*<div>input state: {inputState}</div>*/}
+       {/*<div>input state: {inputState}</div>*/}
         <button
-          onClick={() => {
-            addNote(inputState);
-            setState({ ...state, inputState: "" });
-          }}
+          onClick={() =>
+            setState({ ...state, newTask: inputState, inputState: "" })
+          }
         >
           add task
         </button>
